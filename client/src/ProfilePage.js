@@ -264,6 +264,7 @@ const ProfilePage = ({ user, tasks, receivedMessages, setReceivedMessages }) => 
               <h3>Üzenet részletei</h3>
               <p><strong>Feladó:</strong> {selectedMessage.from}</p>
               <p><strong>Tárgy:</strong> {selectedMessage.subject}</p>
+              <p><strong>Üzenet:</strong> {selectedMessage.body}</p>
               <p style={{ margin: '1rem 0' }}>{selectedMessage.content}</p>
               <p style={{ fontSize: '0.85rem', color: '#666' }}>
                 {new Date(selectedMessage.timestamp).toLocaleString()}
