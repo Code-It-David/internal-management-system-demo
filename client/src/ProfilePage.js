@@ -15,12 +15,14 @@ const ProfilePage = ({ user, tasks, receivedMessages, setReceivedMessages }) => 
     return;
   }
 
-  
+  const originalSubject = selectedMessage.subject.startsWith("Re: ")
+    ? selectedMessage.subject
+    : `Re: ${selectedMessage.subject}`;
 
   const replyMessage = {
     from: user.username,
     to: selectedMessage.from,
-    subject: `Re: ${selectedMessage.subject}`,
+    subject: originalSubject,
     body: replyBody
   };
 
@@ -167,7 +169,7 @@ const ProfilePage = ({ user, tasks, receivedMessages, setReceivedMessages }) => 
           <p style={{ fontStyle: 'italic', color: 'green' }}>Minden készen van! 🙂</p>
         )}
 
-        <h2 style={{ marginTop: '3rem' }}>📨 Beérkezett üzenetek</h2>
+        <h2 style={{ marginTop: '3rem' }}>Beérkezett üzenetek</h2>
         {receivedMessages.length === 0 ? (
           <p>Nincsenek üzenetek.</p>
         ) : (

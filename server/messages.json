@@ -46,7 +46,7 @@
     "content": "teszt234",
     "timestamp": "2025-07-27T14:26:10.932Z",
     "read": true,
-    "replied": false
+    "replied": true
   },
   {
     "id": 8,
@@ -85,6 +85,26 @@
     "subject": "Re: Re: Re: sa",
     "body": "hmhg",
     "timestamp": "2025-07-28T15:33:18.471Z",
+    "read": true,
+    "replied": false
+  },
+  {
+    "id": 13,
+    "from": "Anna",
+    "to": "admin",
+    "subject": "Re: teszt",
+    "body": "keees",
+    "timestamp": "2025-07-29T14:53:56.243Z",
+    "read": true,
+    "replied": false
+  },
+  {
+    "id": 14,
+    "from": "admin",
+    "to": "Anna",
+    "subject": "Re: teszt",
+    "body": "lalalalalala",
+    "timestamp": "2025-07-29T14:56:16.931Z",
     "read": true,
     "replied": false
   }
