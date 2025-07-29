@@ -1,0 +1,91 @@
+[
+  {
+    "id": 3,
+    "from": "admin",
+    "to": "Bela",
+    "subject": "Túlóra",
+    "content": "Szia Béla. Azért írok neked mert be kellene önni dolgozni a hétvégén is, Csaba kiesett csak rád tudunk számítani, a web applikáció befejezésével. Várunk szombaton 9:00-kor.",
+    "timestamp": "2025-07-27T08:18:47.902Z",
+    "read": true
+  },
+  {
+    "id": 4,
+    "from": "admin",
+    "to": "Anna",
+    "subject": "Anna",
+    "content": "Hogy vagy?",
+    "timestamp": "2025-07-27T09:07:21.629Z",
+    "read": true,
+    "replied": false
+  },
+  {
+    "id": 5,
+    "from": "admin",
+    "to": "Csaba",
+    "subject": "Re: Kellene szabi",
+    "body": "rendben mehetsz",
+    "timestamp": "2025-07-27T13:54:08.863Z",
+    "read": true,
+    "replied": false
+  },
+  {
+    "id": 6,
+    "from": "admin",
+    "to": "Anna",
+    "subject": "Szia Anna",
+    "content": "Holnap szabi neked",
+    "timestamp": "2025-07-27T14:13:43.120Z",
+    "read": true,
+    "replied": false
+  },
+  {
+    "id": 7,
+    "from": "admin",
+    "to": "Anna",
+    "subject": "teszt",
+    "content": "teszt234",
+    "timestamp": "2025-07-27T14:26:10.932Z",
+    "read": true,
+    "replied": false
+  },
+  {
+    "id": 8,
+    "from": "admin",
+    "to": "Bela",
+    "subject": "sziA",
+    "content": "asder",
+    "timestamp": "2025-07-27T14:42:53.686Z",
+    "read": true,
+    "replied": false
+  },
+  {
+    "id": 10,
+    "from": "Anna",
+    "to": "admin",
+    "subject": "Re: sa",
+    "body": "lkllk",
+    "timestamp": "2025-07-27T14:54:13.786Z",
+    "read": true,
+    "replied": true
+  },
+  {
+    "id": 11,
+    "from": "admin",
+    "to": "Anna",
+    "subject": "Re: Re: sa",
+    "body": "gfgfhfg",
+    "timestamp": "2025-07-28T15:32:09.868Z",
+    "read": true,
+    "replied": true
+  },
+  {
+    "id": 12,
+    "from": "Anna",
+    "to": "admin",
+    "subject": "Re: Re: Re: sa",
+    "body": "hmhg",
+    "timestamp": "2025-07-28T15:33:18.471Z",
+    "read": false,
+    "replied": false
+  }
+]

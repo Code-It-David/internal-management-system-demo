@@ -1,0 +1,36 @@
+[
+    {
+        "username": "admin",
+        "password": "admin123",
+        "role": "boss",
+        "image": "anna.avif"
+    },
+    {
+        "username": "Anna",
+        "password": "Annavagyok",
+        "role": "worker",
+        "job": "Frontend-fejlesztő",
+        "image": "anna.avif"
+    },
+    {
+        "username": "Bela",
+        "password": "Belavagyok",
+        "role": "worker",
+        "job": "Backend-fejlesztő",
+        "image": "bela.avif"
+    },
+    {
+        "username": "Csaba",
+        "password": "Csabavagyok",
+        "role": "worker",
+        "job": "Manager",
+        "image": "csaba.jpeg"
+    },
+    {
+        "username": "Dóra",
+        "password": "Doravagyok",
+        "role": "worker",
+        "job": "Recruiter",
+        "image": "dora.png"
+    }
+]
