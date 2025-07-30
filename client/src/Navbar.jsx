@@ -57,7 +57,7 @@ const Navbar = ({ onLogout, onGoHome, onGoEmployees, onGoProfile, hasUnreadMessa
               zIndex: 1001
             }}
           >
-            <div style={menuItemStyle} onClick={onGoHome}>Kezdőlap</div>
+            <div style={menuItemStyle} onClick={onGoHome}>Home</div>
            <div style={{ ...menuItemStyle, position: 'relative', paddingLeft: hasUnreadMessages ? '1.5rem' : '1.5rem' }} onClick={onGoProfile}>
   {hasUnreadMessages && (
     <span
@@ -69,16 +69,16 @@ const Navbar = ({ onLogout, onGoHome, onGoEmployees, onGoProfile, hasUnreadMessa
       }}
     />
   )}
-  Profilom
+  Profile
 </div>
 
 
-            <div style={menuItemStyle} onClick={onGoEmployees}>Dolgozók</div>
+            <div style={menuItemStyle} onClick={onGoEmployees}>Employees</div>
             <div
               style={{ ...menuItemStyle, borderTop: '1px solid #eee' }}
               onClick={onLogout}
             >
-              Kijelentkezés
+              Logout
             </div>
           </div>
         )}
