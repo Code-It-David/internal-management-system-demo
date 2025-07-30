@@ -132,26 +132,36 @@ return (
         onGoProfile={() => setView('profile')}
       />
     )}
-
+    <form onSubmit={(e) => {e.preventDefault();handleLogin();}}></form>
     <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
       {!user && <h1>Login</h1>}
 
       {!user ? (
-        <>
-          <input
-            placeholder="Username"
-            value={loginData.username}
-            onChange={e => setLoginData({ ...loginData, username: e.target.value })}
-          /><br /><br />
-          <input
-            type="password"
-            placeholder="Password"
-            value={loginData.password}
-            onChange={e => setLoginData({ ...loginData, password: e.target.value })}
-          /><br /><br />
-          <button onClick={handleLogin}>Login</button>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-        </>
+  <>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleLogin();
+      }}
+    >
+      <input
+        placeholder="Username"
+        value={loginData.username}
+        onChange={e => setLoginData({ ...loginData, username: e.target.value })}
+      /><br /><br />
+      <input
+        type="password"
+        placeholder="Password"
+        value={loginData.password}
+        onChange={e => setLoginData({ ...loginData, password: e.target.value })}
+      /><br /><br />
+      <button type="submit">Login</button>
+    </form>
+
+    {error && <p style={{ color: 'red' }}>{error}</p>}
+  </>
+
+
       ) : view === 'employees' ? (
         <EmployeesPage user={user} tasks={tasks} workers={workers} />
       ) : view === 'profile' ? (
@@ -170,54 +180,62 @@ return (
 {user?.role === 'worker' && (
   <div style={{ marginTop: '2rem' }}>
     <h2>Assigned tasks</h2>
-    {tasks
-      .filter(task => task.assignedTo === user.username && task.status === 'assigned')
-      .map(task => {
-        const isUrgent = task.deadline && (new Date(task.deadline) - new Date() < 24 * 60 * 60 * 1000);
-        return (
-          <div key={task.id} style={{
-            borderRadius: '12px',
-            padding: '1.5rem',
-            marginBottom: '1rem',
-            backgroundColor: isUrgent ? '#ffe5e5' : '#f9f9f9',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-            transition: 'transform 0.2s',
-            borderLeft: isUrgent ? '5px solid #d33' : '5px solid #1e90ff',
-            position: 'relative'
-          }}>
-            <h3 style={{ margin: '0 0 0.5rem 0' }}>{task.title}</h3>
-            <p style={{ margin: '0 0 0.75rem 0', fontSize: '0.95rem', color: '#333' }}>{task.description}</p>
-            {task.deadline && (
-              <p style={{ fontSize: '0.85rem', color: '#666' }}>
-                ⏰ Deadline: {new Date(task.deadline).toLocaleString()}
-              </p>
-            )}
-            <button
-              onClick={async () => {
-                await axios.post('/complete-task', { taskId: task.id });
-                axios.get('/tasks').then(res => setTasks(res.data));
-              }}
-              style={{
-                marginTop: '1rem',
-                background: '#4CAF50',
-                color: 'white',
-                border: 'none',
-                borderRadius: '6px',
-                padding: '0.5rem 1rem',
-                cursor: 'pointer',
-                fontSize: '0.9rem',
-                transition: 'background 0.2s ease'
-              }}
-              onMouseEnter={e => e.currentTarget.style.background = '#45a049'}
-              onMouseLeave={e => e.currentTarget.style.background = '#4CAF50'}
-            >
-              ✅ Done
-            </button>
-          </div>
-        );
-      })}
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", justifyContent: "flex-start" }}>
+      {tasks
+        .filter(task => task.assignedTo === user.username && task.status === 'assigned')
+        .map(task => {
+          const isUrgent = task.deadline && (new Date(task.deadline) - new Date() < 24 * 60 * 60 * 1000);
+          return (
+            <div key={task.id} style={{
+              borderRadius: '12px',
+              width: "222px",
+              padding: '1.5rem',
+              marginBottom: '1rem',
+              backgroundColor: isUrgent ? '#ffe5e5' : '#f9f9f9',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+              transition: 'transform 0.2s',
+              borderLeft: isUrgent ? '5px solid #d33' : '5px solid #1e90ff',
+              position: 'relative'
+            }}>
+              <h3 style={{ margin: '0 0 0.5rem 0' }}>{task.title}</h3>
+              <p style={{ margin: '0 0 0.75rem 0', fontSize: '0.95rem', color: '#333' }}>{task.description}</p>
+              {task.deadline && (
+                <p style={{ fontSize: '0.85rem', color: '#666' }}>
+                  ⏰ Deadline: {new Date(task.deadline).toLocaleString()}
+                </p>
+              )}
+
+              <button
+                onClick={async () => {
+                  await axios.post('/complete-task', { taskId: task.id });
+                  axios.get('/tasks').then(res => setTasks(res.data));
+                }}
+                style={{
+                  marginTop: '1rem',
+                  background: '#4CAF50',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '6px',
+                  padding: '0.5rem 1rem',
+                  cursor: 'pointer',
+                  fontSize: '0.9rem',
+                  transition: 'background 0.2s ease'
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = '#45a049'}
+                onMouseLeave={e => e.currentTarget.style.background = '#4CAF50'}
+              >
+                ✅ Done
+              </button>
+            </div>
+          );
+        })}
+    </div>
   </div>
 )}
+
+      
+
+
 
 
           
@@ -225,7 +243,7 @@ return (
             <>
               
               <div style={{ marginBottom: '2rem' }}>
-                <h2>Új feladat hozzáadása</h2>
+                <h2>Add new task</h2>
                 <input
                   placeholder="Task name"
                   value={newTask.title}

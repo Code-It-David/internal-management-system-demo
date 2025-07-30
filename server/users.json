@@ -9,21 +9,21 @@
         "username": "Anna",
         "password": "Annavagyok",
         "role": "worker",
-        "job": "Frontend-fejlesztő",
+        "job": "Frontend-developer",
         "image": "anna.avif"
     },
     {
         "username": "Bela",
         "password": "Belavagyok",
         "role": "worker",
-        "job": "Backend-fejlesztő",
+        "job": "Backend-developer",
         "image": "bela.avif"
     },
     {
         "username": "Csaba",
         "password": "Csabavagyok",
         "role": "worker",
-        "job": "Manager",
+        "job": "Fullstack-developer",
         "image": "csaba.jpeg"
     },
     {
