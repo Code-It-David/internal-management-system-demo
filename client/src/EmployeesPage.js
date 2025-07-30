@@ -14,7 +14,7 @@ const EmployeesPage = ({ user, tasks, workers }) => {
   if (!user) return null;
 
   const sortedUsers = [...workers]
-  .filter(w => w.username !== user.username && w.username.toLowerCase().startsWith(searchTerm.toLowerCase())) // saját magát kiszűrjük
+  .filter(w => w.username !== user.username && w.username.toLowerCase().startsWith(searchTerm.toLowerCase()))
   .sort((a, b) => {
     if (a.role === 'boss' && b.role !== 'boss') return -1;
     if (a.role !== 'boss' && b.role === 'boss') return 1;
@@ -29,7 +29,7 @@ const EmployeesPage = ({ user, tasks, workers }) => {
         <h1>Dolgozók</h1>
         <input
   type="text"
-  placeholder="Keresés név szerint..."
+  placeholder="Search by name..."
   value={searchTerm}
   onChange={(e) => setSearchTerm(e.target.value)}
   style={{
@@ -79,7 +79,7 @@ const EmployeesPage = ({ user, tasks, workers }) => {
               />
               <strong style={{ fontSize: '1.4rem' }}>{worker.username}</strong><br />
               <span style={{ fontSize: '1.1rem', color: '#555' }}>
-                {worker.job || (worker.role === 'boss' ? 'Adminisztrátor' : 'Dolgozó')}
+                {worker.job || (worker.role === 'boss' ? 'Manager' : 'Employee')}
               </span>
 
               <ul style={{ marginTop: '2rem', paddingLeft: '1rem', textAlign: 'left' }}>
