@@ -60,7 +60,7 @@ const addNewTask = async () => {
   if (user) {
     axios.get(`/messages/${user.username}`)
       .then(res => setReceivedMessages(res.data.received))
-      .catch(err => console.error('Nem sikerült betölteni az üzeneteket.', err));
+      .catch(err => console.error('Failed loading messages.', err));
   }
 }, [user]);
 
@@ -74,7 +74,7 @@ const addNewTask = async () => {
       setView('home');
     } catch (err) {
       setUser(null);
-      setError('Hibás bejelntkezési adatok');
+      setError('Incorrect username or password.');
     }
   };
 
@@ -82,7 +82,7 @@ const addNewTask = async () => {
     if (user?.role === 'boss') {
       axios.get('/tasks')
         .then(res => setTasks(res.data))
-        .catch(err => console.error('Nem sikerült lekérni a feladatokat', err));
+        .catch(err => console.error('Error getting tasks.', err));
     }
   }, [user]);
 
@@ -90,7 +90,7 @@ const addNewTask = async () => {
     if (user?.role === 'boss') {
       axios.get('/users')
         .then(res => setWorkers(res.data))
-        .catch(err => console.error('Nem sikerült betölteni a dolgozókat.', err));
+        .catch(err => console.error('Error loading users.', err));
     }
   }, [user]);
 
@@ -105,10 +105,10 @@ const addNewTask = async () => {
   if (user?.role === 'boss') {
     axios.get('/users')
       .then(res => {
-        console.log('Dolgozók betöltve:', res.data);
+        console.log('Employees loaded:', res.data);
         setWorkers(res.data);
       })
-      .catch(err => console.error('Nem sikerült betölteni a dolgozókat.', err));
+      .catch(err => console.error('Error loading employees.', err));
   }
 }, [user]);
 
@@ -134,22 +134,22 @@ return (
     )}
 
     <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
-      {!user && <h1>Bejelentkezés</h1>}
+      {!user && <h1>Login</h1>}
 
       {!user ? (
         <>
           <input
-            placeholder="Felhasználónév"
+            placeholder="Username"
             value={loginData.username}
             onChange={e => setLoginData({ ...loginData, username: e.target.value })}
           /><br /><br />
           <input
             type="password"
-            placeholder="Jelszó"
+            placeholder="Password"
             value={loginData.password}
             onChange={e => setLoginData({ ...loginData, password: e.target.value })}
           /><br /><br />
-          <button onClick={handleLogin}>Belépés</button>
+          <button onClick={handleLogin}>Login</button>
           {error && <p style={{ color: 'red' }}>{error}</p>}
         </>
       ) : view === 'employees' ? (
@@ -159,17 +159,17 @@ return (
       ) : (
         <>
           <p
-          style={{fontSize: '1.8rem', color:'#003366', textShadow: '1px 1px 2px rgba(0,0,0,0.2)', marginBottom:'1rem', fontWeight: 'bold'}}>Szia, {user.username}! </p>
+          style={{fontSize: '1.8rem', color:'#003366', textShadow: '1px 1px 2px rgba(0,0,0,0.2)', marginBottom:'1rem', fontWeight: 'bold'}}>Welcome back, {user.username}! </p>
           <button onClick={() => {
             setUser(null);
             localStorage.removeItem('user');
             setLoginData({ username: '', password: '' });
-          }}>Kijelentkezés</button>
+          }}>Logout</button>
 
           
 {user?.role === 'worker' && (
   <div style={{ marginTop: '2rem' }}>
-    <h2>Feladataid</h2>
+    <h2>Assigned tasks</h2>
     {tasks
       .filter(task => task.assignedTo === user.username && task.status === 'assigned')
       .map(task => {
@@ -189,7 +189,7 @@ return (
             <p style={{ margin: '0 0 0.75rem 0', fontSize: '0.95rem', color: '#333' }}>{task.description}</p>
             {task.deadline && (
               <p style={{ fontSize: '0.85rem', color: '#666' }}>
-                ⏰ Határidő: {new Date(task.deadline).toLocaleString()}
+                ⏰ Deadline: {new Date(task.deadline).toLocaleString()}
               </p>
             )}
             <button
@@ -211,7 +211,7 @@ return (
               onMouseEnter={e => e.currentTarget.style.background = '#45a049'}
               onMouseLeave={e => e.currentTarget.style.background = '#4CAF50'}
             >
-              ✅ Kész
+              ✅ Done
             </button>
           </div>
         );
@@ -227,19 +227,19 @@ return (
               <div style={{ marginBottom: '2rem' }}>
                 <h2>Új feladat hozzáadása</h2>
                 <input
-                  placeholder="Feladat címe"
+                  placeholder="Task name"
                   value={newTask.title}
                   onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
                 /><br /><br />
                 <textarea
-                  placeholder="Feladat leírása"
+                  placeholder="Description"
                   value={newTask.description}
                   onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
                   rows={4}
                   style={{ width: '300px' }}
                 /><br /><br />
 
-                <label htmlFor="deadline">Határidő:</label><br />
+                <label htmlFor="deadline">Deadline:</label><br />
                 <input
                   id="deadline"
                   type="date"
@@ -247,11 +247,11 @@ return (
                   onChange={(e) => setNewTask({ ...newTask, deadline: e.target.value })}
                 /><br /><br />
 
-                <button onClick={addNewTask}>Hozzáadás</button>
+                <button onClick={addNewTask}>Add task</button>
               </div>
 
              
-              <h2>Feladatok</h2>
+              <h2>Tasks</h2>
               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                 {tasks.map(task => {
                   const isUrgent = task.deadline && (new Date(task.deadline) - new Date() < 24 * 60 * 60 * 1000);
@@ -275,19 +275,19 @@ return (
                       <p>{task.description}</p>
                       {task.deadline && (
                         <p style={{ fontSize: '0.9rem' }}>
-                          Határidő: {new Date(task.deadline).toLocaleString()}
+                          Deadline: {new Date(task.deadline).toLocaleString()}
                         </p>
                       )}
                       <small>
                         {task.assignedTo
-                          ? `Hozzárendelve: ${task.assignedTo}`
-                          : 'Nincs kiosztva'}
+                          ? `Assigned to: ${task.assignedTo}`
+                          : 'Not assigned yet'}
                       </small><br />
                       {task.status === 'done' && (
                         <button onClick={async () => {
                           await axios.delete(`/task/${task.id}`);
                           axios.get('/tasks').then(res => setTasks(res.data));
-                        }}>✔ Jóváhagyás (törlés)</button>
+                        }}>✔ Approve (delete)</button>
                       )}
                     </div>
                   );
@@ -296,10 +296,10 @@ return (
 
              
               <div style={{ marginTop: '2rem', marginBottom: '1rem' }}>
-  <h2>Dolgozók</h2>
+  <h2>Employees</h2>
   <input
     type="text"
-    placeholder="Keresés név szerint..."
+    placeholder="Search by name..."
     value={searchTerm}
     onChange={e => setSearchTerm(e.target.value)}
     style={{
@@ -362,7 +362,7 @@ return (
                     />
                     <strong style={{ fontSize: '1.4rem' }}>{worker.username}</strong><br />
                     <span style={{ fontSize: '1.1rem', color: '#555' }}>
-                      {worker.job || 'Dolgozó'}
+                      {worker.job || 'Employee'}
                     </span>
 
                     <ul style={{ marginTop: '2rem', paddingLeft: '1rem', textAlign: 'left' }}>
