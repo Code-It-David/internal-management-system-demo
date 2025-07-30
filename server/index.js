@@ -17,7 +17,7 @@ app.post('/login', (req, res) => {
   if (foundUser) {
     res.json(foundUser);
   } else {
-    res.status(401).json({ message: 'Hibás bejelentkezési adatok' });
+    res.status(401).json({ message: 'Incorrect username or password' });
   }
 });
 
@@ -25,8 +25,8 @@ app.post('/login', (req, res) => {
 app.get('/tasks', (req, res) => {
     fs.readFile('./tasks.json', 'utf8', (err, data) => {
         if (err) {
-            console.error('Nem sikerült beolvasni a tasks.json file tartalmát.', err);
-            return res. status(500).json({message: 'Szerverhiba'});
+            console.error('Failed reading tasks.json.', err);
+            return res. status(500).json({message: 'Server error'});
         }
         const tasks = JSON.parse(data);
         res.json(tasks);
@@ -36,8 +36,8 @@ app.get('/tasks', (req, res) => {
 app.get('/users', (req, res) => {
   fs.readFile(path.join(__dirname, 'users.json'), 'utf8', (err, data) => {
     if (err) {
-      console.error('Nem sikerült beolvasni a users.json-t:', err);
-      return res.status(500).json({ message: 'Szerverhiba' });
+      console.error('Failed reading users.json:', err);
+      return res.status(500).json({ message: 'Server error' });
     }
 
     const users = JSON.parse(data);
@@ -54,16 +54,16 @@ app.post('/complete-task', (req, res) => {
     const tasksPath = path.join(__dirname, 'tasks.json');
 
     fs.readFile(tasksPath, 'utf8', (err, data) => {
-        if (err) return res.status(500).json({message: 'Hiba a fájl olvasásakor.'});
+        if (err) return res.status(500).json({message: 'Failed reading the file.'});
         let tasks = JSON.parse(data);
         const index = tasks.findIndex(t => t.id === taskId);
-        if (index === -1) return res.status(404).json({message: 'Feladat nem található.'});
+        if (index === -1) return res.status(404).json({message: 'Failed finding tasks.'});
 
         tasks[index].status = 'done';
 
         fs.writeFile(tasksPath, JSON.stringify(tasks, null, 2), err => {
-            if (err) return res.status(500).json({message: 'Mentési hiba'});
-            res.json({message: 'Feladat készre jelölve.'});
+            if (err) return res.status(500).json({message: 'Failed saving'});
+            res.json({message: 'Task marked as done'});
         });
     });
 });
@@ -73,17 +73,17 @@ app.post('/assign-task', (req, res) => {
     const tasksPath = path.join(__dirname, 'tasks.json');
 
     fs.readFile(tasksPath, 'utf8', (err, data) => {
-        if (err) return res.status(500).json({message: 'Hiba olvasás közben'});
+        if (err) return res.status(500).json({message: 'Failed reading the file'});
 
         let tasks = JSON.parse(data);
         const index = tasks.findIndex(t => t.id === taskId);
-        if (index === -1) return res.status(404).json({message: 'Feladat nem található.'});
+        if (index === -1) return res.status(404).json({message: 'Could not find task.'});
         tasks[index].assignedTo = assignedTo;
         tasks[index].status = 'assigned';
 
         fs.writeFile(tasksPath, JSON.stringify(tasks, null, 2), (err) => {
-            if (err) return res.status(500).json({message: 'Hiba írás közben'});
-            res.json({message: 'Feladat frissítve'});
+            if (err) return res.status(500).json({message: 'Failed writing the file.'});
+            res.json({message: 'Task updated.'});
         });
     });
 });
@@ -91,13 +91,13 @@ app.post('/assign-task', (req, res) => {
 app.delete('/task/:id', (req, res) => {
     const taskId = parseInt(req.params.id);
     fs.readFile('./tasks.json', 'utf8', (err,data) => {
-        if (err) return res.status(500).json({message: 'Hiba a fájl olvasásakor.'});
+        if (err) return res.status(500).json({message: 'Error reading the file.'});
         let tasks = JSON.parse(data);
         tasks = tasks.filter(t => t.id !== taskId);
 
         fs.writeFile('./tasks.json', JSON.stringify(tasks, null, 2), err => {
-            if (err) return res.status(500).json({message: 'Mentési hiba'});
-            res.json({message: 'Feladat törölve'});
+            if (err) return res.status(500).json({message: 'Error saving.'});
+            res.json({message: 'Task deleted'});
         });
     });
 });
@@ -108,7 +108,7 @@ app.post('/add-task', (req, res) => {
     const tasksPath = path.join(__dirname, 'tasks.json');
 
     fs.readFile(tasksPath, 'utf8', (err,data) => {
-        if (err) return res.status(500).json({message: 'Hiba olvasáskor'});
+        if (err) return res.status(500).json({message: 'Failed reading the file.'});
 
         let tasks = JSON.parse(data);
         const newId = tasks.length > 0 ? Math.max(...tasks.map(t =>t.id)) + 1 : 1;
@@ -122,8 +122,8 @@ app.post('/add-task', (req, res) => {
         };
         tasks.push(newTask);
         fs.writeFile(tasksPath, JSON.stringify(tasks, null, 2), (err) => {
-            if (err) return res.status(500).json({message: 'Hiba írás közben'});
-            res.json({message: 'Feladat hozzáadva', task: newTask});
+            if (err) return res.status(500).json({message: 'Failed writing the file.'});
+            res.json({message: 'Task added', task: newTask});
         });
     });
 });
@@ -131,18 +131,18 @@ app.post('/add-task', (req, res) => {
 app.post('/send-message', (req,res) => {
     const {from, to, subject, content} = req.body;
     if (!from || !to || !subject || !content) {
-        return res.status(400).json({message: 'Hiányzó adatok az üzenethez'});
+        return res.status(400).json({message: 'Please fill all required fields.'});
     }
 
     const messagesPath = path.join(__dirname, 'messages.json');
     fs.readFile(messagesPath, 'utf8', (err,data) => {
-        if (err) return res.status(500).json({message: 'Hiba az üzenetfájl olvasásakor'});
+        if (err) return res.status(500).json({message: 'Failed reading message.'});
 
         let messages = [];
         try {
             messages = JSON.parse(data);
         } catch (e) {
-            return res.status(500).json({message: 'Hibás JSON fomrátum'});
+            return res.status(500).json({message: 'Wrong JSON format'});
         }
 
         const newMessage = {
@@ -158,8 +158,8 @@ app.post('/send-message', (req,res) => {
         messages.push(newMessage);
 
         fs.writeFile(messagesPath, JSON.stringify(messages, null, 2), err => {
-            if (err) return res.status(500).json({message: 'Mentési hiba'});
-            res.json({message: 'Üzenet elküldve'});
+            if (err) return res.status(500).json({message: 'Error at saving'});
+            res.json({message: 'Message sent'});
         });
     });
 });
@@ -169,13 +169,13 @@ app.get('/messages/:username', (req, res) => {
     const messagesPath = path.join(__dirname,'messages.json');
 
     fs.readFile(messagesPath, 'utf8', (err, data) => {
-        if (err) return res.status(500).json({message: 'Nem sikerült beolvasni az üzenetet'});
+        if (err) return res.status(500).json({message: 'Could not read message'});
 
         let messages = [];
         try {
             messages = JSON.parse(data);
         } catch (e) {
-            return res.status(500).json({message: 'Hibás JSON formátum'});
+            return res.status(500).json({message: 'Wrong JSON format.'});
         }
 
         const received = messages.filter(m => m.to === username);
@@ -187,23 +187,23 @@ app.patch('/messages/:id/read', (req, res) => {
     const messageId = parseInt(req.params.id);
     const messagesPath = path.join(__dirname, 'messages.json');
     fs.readFile(messagesPath, 'utf8', (err, data) => {
-        if (err) return res.status(500).json({message: 'Nem sikerült beolvasni az üzeneteket.'});
+        if (err) return res.status(500).json({message: 'Could not read messages'});
 
         let messages = [];
         try {
             messages = JSON.parse(data);
 
         } catch (e) {
-            return res.status(500).json({message: 'Hibás JSON formátum'});
+            return res.status(500).json({message: 'Wrong JSON format'});
         }
 
         const index = messages.findIndex(m => m.id === messageId);
-        if (index === -1) return res.status(404).json({message: 'Üzenet nem található'});
+        if (index === -1) return res.status(404).json({message: 'Could not find message'});
         messages[index].read = true;
 
         fs.writeFile(messagesPath, JSON.stringify(messages, null, 2), err => {
-            if (err) return res.status(500).json({message: 'Nem sikerült menteni az üzenetet.'});
-            res.json({message: 'Üzenet olvasottra állítva'});
+            if (err) return res.status(500).json({message: 'Could not save message'});
+            res.json({message: 'Message marked as read.'});
         });
     });
 });
@@ -213,13 +213,13 @@ app.post('/messages/reply', (req, res) => {
     const messagesPath = path.join(__dirname, 'messages.json');
 
     fs.readFile(messagesPath, 'utf8', (err, data) => {
-        if (err) return res.status(500).json({ message: 'Nem sikerült beolvasni az üzeneteket.' });
+        if (err) return res.status(500).json({ message: 'Could not read messages.' });
 
         let messages = [];
         try {
             messages = JSON.parse(data);
         } catch (e) {
-            return res.status(500).json({ message: 'Hibás JSON formátum.' });
+            return res.status(500).json({ message: 'Wrong JSON format' });
         }
 
         const newId = messages.length > 0 ? Math.max(...messages.map(m => m.id)) + 1 : 1;
@@ -245,8 +245,8 @@ app.post('/messages/reply', (req, res) => {
         messages.push(newMessage);
 
         fs.writeFile(messagesPath, JSON.stringify(messages, null, 2), err => {
-            if (err) return res.status(500).json({ message: 'Nem sikerült menteni az üzenetet.' });
-            res.json({ message: 'Válasz elküldve.', newMessage });
+            if (err) return res.status(500).json({ message: 'Failed saving message' });
+            res.json({ message: 'Reply sent', newMessage });
         });
     });
 });
@@ -256,23 +256,23 @@ app.delete('/messages/:id', (req, res) => {
   const messagesPath = path.join(__dirname, 'messages.json');
 
   fs.readFile(messagesPath, 'utf8', (err, data) => {
-    if (err) return res.status(500).json({ message: 'Nem sikerült beolvasni az üzeneteket.' });
+    if (err) return res.status(500).json({ message: 'Could not read messages' });
 
     let messages = [];
     try {
       messages = JSON.parse(data);
     } catch (e) {
-      return res.status(500).json({ message: 'Hibás JSON formátum.' });
+      return res.status(500).json({ message: 'Wrong JSON format' });
     }
 
     const updatedMessages = messages.filter(m => m.id !== messageId);
 
     if (updatedMessages.length === messages.length)
-      return res.status(404).json({ message: 'Üzenet nem található.' });
+      return res.status(404).json({ message: 'Could not find message' });
 
     fs.writeFile(messagesPath, JSON.stringify(updatedMessages, null, 2), err => {
-      if (err) return res.status(500).json({ message: 'Nem sikerült menteni az üzenetet.' });
-      res.json({ message: 'Üzenet törölve.' });
+      if (err) return res.status(500).json({ message: 'Error saving the message' });
+      res.json({ message: 'Message deleted' });
     });
   });
 });
@@ -281,5 +281,5 @@ app.delete('/messages/:id', (req, res) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Backend fut: http://localhost:${PORT}`);
+    console.log(`Backend running: http://localhost:${PORT}`);
 })
