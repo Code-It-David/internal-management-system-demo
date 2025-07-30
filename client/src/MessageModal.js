@@ -30,15 +30,15 @@ const MessageModal = ({ toUser, onClose }) => {
   return (
   <div style={modalBackgroundStyle} onClick={onClose}>
     <div style={modalStyle} onClick={e => e.stopPropagation()}>
-      <h2>Üzenet küldése</h2>
-      <p><strong>Címzett:</strong> {toUser.username}</p>
+      <h2>Send message</h2>
+      <p><strong>To:</strong> {toUser.username}</p>
 
-      <label>Tárgy</label><br />
+      <label>Subject</label><br />
       <input
         type="text"
         value={subject}
         onChange={e => setSubject(e.target.value)}
-        placeholder="Pl.: Frissítés a feladatról"
+        placeholder="Enter a subject..."
         style={{
           width: '100%',
           padding: '0.5rem',
@@ -48,12 +48,12 @@ const MessageModal = ({ toUser, onClose }) => {
         }}
       /><br />
 
-      <label>Üzenet</label><br />
+      <label>Message</label><br />
       <textarea
         rows={5}
         value={content}
         onChange={e => setContent(e.target.value)}
-        placeholder="Írd ide az üzeneted..."
+        placeholder="Type your message here..."
         style={{
           width: '100%',
           padding: '0.5rem',
@@ -75,7 +75,7 @@ const MessageModal = ({ toUser, onClose }) => {
             cursor: 'pointer'
           }}
         >
-          Mégse
+          Cancel
         </button>
         <button
           onClick={async () => {
@@ -87,11 +87,11 @@ const MessageModal = ({ toUser, onClose }) => {
                 subject,
                 content
               });
-              setFeedback('Üzenet sikeresen elküldve.');
+              setFeedback('Successfully sent.');
               setSubject('');
               setContent('');
             } catch (err) {
-              setFeedback('Hiba történt az üzenet küldése közben.');
+              setFeedback('Failed sending message.');
             } finally {
               setSending(false);
             }
@@ -106,7 +106,7 @@ const MessageModal = ({ toUser, onClose }) => {
             cursor: 'pointer'
           }}
         >
-          Küldés
+          Send
         </button>
       </div>
 
