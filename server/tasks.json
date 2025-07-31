@@ -1,34 +1,42 @@
 [
   {
-    "id": 3,
-    "title": "Dokumentáció 4",
-    "description": "A rendszer inicializálásának lépései markdown fáljlban.",
-    "assignedTo": "Anna",
+    "id": 1,
+    "title": "Project Documentation",
+    "description": "Outline the system initialization steps in a markdown file.",
+    "assignedTo": "Sophie",
     "status": "assigned",
     "deadline": "2025-07-20T16:00:00"
   },
   {
-    "id": 5,
-    "title": "asd",
-    "description": "asderrrr",
-    "assignedTo": "Anna",
+    "id": 2,
+    "title": "Landing page",
+    "description": "Polish the layout and responsive design for mobile view.",
+    "assignedTo": "Sophie",
     "status": "done",
     "deadline": "2025-07-31"
   },
   {
-    "id": 6,
-    "title": "Web app fejlesztes",
-    "description": "Legyen kesz ma.",
-    "assignedTo": "Anna",
-    "status": "done",
-    "deadline": "2025-07-31"
-  },
-  {
-    "id": 7,
-    "title": "Backend bugfixes",
-    "description": "Fix the bug occuring when the user opens the image, it doesn't show up.",
-    "assignedTo": "Anna",
+    "id": 3,
+    "title": "Employee Management Module",
+    "description": "Implement UI logic for assigning and removing users.",
+    "assignedTo": "Chloe",
     "status": "assigned",
+    "deadline": "2025-07-31"
+  },
+  {
+    "id": 4,
+    "title": "Backend Bug Fixes",
+    "description": "Resolve the image loading issue on the user profile page.",
+    "assignedTo": "Liam",
+    "status": "done",
     "deadline": "2025-08-02"
+  },
+  {
+    "id": 5,
+    "title": "Urgent Task: Notification Testing",
+    "description": "Verify that deadline alerts work when less than 24h remain.",
+    "assignedTo": "Ethan",
+    "status": "assigned",
+    "deadline": "2025-07-31T10:00:00"
   }
 ]

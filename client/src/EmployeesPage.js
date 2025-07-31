@@ -25,8 +25,8 @@ const EmployeesPage = ({ user, tasks, workers }) => {
   return (
     <>
       
-      <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
-        <h1>Dolgozók</h1>
+      <div style={{ padding: '2rem', fontFamily: 'Arial', textAlign: 'center' }}>
+        <h1>Employees</h1>
         <input
   type="text"
   placeholder="Search by name..."
@@ -43,7 +43,7 @@ const EmployeesPage = ({ user, tasks, workers }) => {
 />
 
 
-        <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
           {sortedUsers.map((worker) => (
             <div
               key={worker.username}

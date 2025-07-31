@@ -1,111 +1,29 @@
 [
   {
-    "id": 3,
+    "id": 1,
     "from": "admin",
-    "to": "Bela",
-    "subject": "Túlóra",
-    "content": "Szia Béla. Azért írok neked mert be kellene önni dolgozni a hétvégén is, Csaba kiesett csak rád tudunk számítani, a web applikáció befejezésével. Várunk szombaton 9:00-kor.",
+    "to": "Liam",
+    "subject": "Weekend Work",
+    "content": "Hi Liam, we’ll need your help over the weekend. Ethan is out and we’re counting on you to finish the backend module. Please be at the office by 9:00 AM Saturday.",
     "timestamp": "2025-07-27T08:18:47.902Z",
+    "read": false
+  },
+  {
+    "id": 2,
+    "from": "admin",
+    "to": "Sophie",
+    "subject": "Quick Check-In",
+    "content": "Hey Sophie, just checking in on your progress with the responsive layout. Let me know if you need anything.",
+    "timestamp": "2025-07-27T09:42:21.000Z",
     "read": true
   },
   {
-    "id": 4,
-    "from": "admin",
-    "to": "Anna",
-    "subject": "Anna",
-    "content": "Hogy vagy?",
-    "timestamp": "2025-07-27T09:07:21.629Z",
-    "read": true,
-    "replied": false
-  },
-  {
-    "id": 5,
-    "from": "admin",
-    "to": "Csaba",
-    "subject": "Re: Kellene szabi",
-    "body": "rendben mehetsz",
-    "timestamp": "2025-07-27T13:54:08.863Z",
-    "read": true,
-    "replied": false
-  },
-  {
-    "id": 6,
-    "from": "admin",
-    "to": "Anna",
-    "subject": "Szia Anna",
-    "content": "Holnap szabi neked",
-    "timestamp": "2025-07-27T14:13:43.120Z",
-    "read": true,
-    "replied": false
-  },
-  {
-    "id": 7,
-    "from": "admin",
-    "to": "Anna",
-    "subject": "teszt",
-    "content": "teszt234",
-    "timestamp": "2025-07-27T14:26:10.932Z",
-    "read": true,
-    "replied": true
-  },
-  {
-    "id": 8,
-    "from": "admin",
-    "to": "Bela",
-    "subject": "sziA",
-    "content": "asder",
-    "timestamp": "2025-07-27T14:42:53.686Z",
-    "read": true,
-    "replied": false
-  },
-  {
-    "id": 10,
-    "from": "Anna",
+    "id": 3,
+    "from": "Olivia",
     "to": "admin",
-    "subject": "Re: sa",
-    "body": "lkllk",
-    "timestamp": "2025-07-27T14:54:13.786Z",
-    "read": true,
-    "replied": true
-  },
-  {
-    "id": 11,
-    "from": "admin",
-    "to": "Anna",
-    "subject": "Re: Re: sa",
-    "body": "gfgfhfg",
-    "timestamp": "2025-07-28T15:32:09.868Z",
-    "read": true,
-    "replied": true
-  },
-  {
-    "id": 12,
-    "from": "Anna",
-    "to": "admin",
-    "subject": "Re: Re: Re: sa",
-    "body": "hmhg",
-    "timestamp": "2025-07-28T15:33:18.471Z",
-    "read": true,
-    "replied": false
-  },
-  {
-    "id": 13,
-    "from": "Anna",
-    "to": "admin",
-    "subject": "Re: teszt",
-    "body": "keees",
-    "timestamp": "2025-07-29T14:53:56.243Z",
-    "read": true,
-    "replied": false
-  },
-  {
-    "id": 14,
-    "from": "admin",
-    "to": "Anna",
-    "subject": "Re: teszt",
-    "body": "lalalalalala",
-    "timestamp": "2025-07-29T14:56:16.931Z",
-    "read": true,
-    "replied": false
+    "subject": "HR Forms Update",
+    "content": "Hi, I've uploaded the revised onboarding forms to the shared folder. Let me know if further changes are needed.",
+    "timestamp": "2025-07-28T10:12:33.512Z",
+    "read": true
   }
 ]

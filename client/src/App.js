@@ -133,8 +133,8 @@ return (
       />
     )}
     <form onSubmit={(e) => {e.preventDefault();handleLogin();}}></form>
-    <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
-      {!user && <h1>Login</h1>}
+    <div style={{ padding: '2rem', fontFamily: 'Arial', textAlign: "center"}}>
+      {!user && <h1 style={{fontSize: "53px"}}>Login</h1>}
 
       {!user ? (
   <>
@@ -169,7 +169,7 @@ return (
       ) : (
         <>
           <p
-          style={{fontSize: '1.8rem', color:'#003366', textShadow: '1px 1px 2px rgba(0,0,0,0.2)', marginBottom:'1rem', fontWeight: 'bold'}}>Welcome back, {user.username}! </p>
+          style={{fontSize: '1.8rem', color:'#003366', textShadow: '1px 1px 2px rgba(0,0,0,0.2)', marginBottom:'1rem', fontWeight: 'bold', textAlign: "center"}}>Welcome back, {user.username}! </p>
           <button onClick={() => {
             setUser(null);
             localStorage.removeItem('user');
@@ -179,7 +179,7 @@ return (
           
 {user?.role === 'worker' && (
   <div style={{ marginTop: '2rem' }}>
-    <h2>Assigned tasks</h2>
+    <h2 className="section-title">Assigned tasks</h2>
     <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", justifyContent: "flex-start" }}>
       {tasks
         .filter(task => task.assignedTo === user.username && task.status === 'assigned')
@@ -243,7 +243,7 @@ return (
             <>
               
               <div style={{ marginBottom: '2rem' }}>
-                <h2>Add new task</h2>
+                <h2 className="section-title">Add new task</h2>
                 <input
                   placeholder="Task name"
                   value={newTask.title}
@@ -269,24 +269,26 @@ return (
               </div>
 
              
-              <h2>Tasks</h2>
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <h2 className="section-title">Tasks</h2>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: "center" }}>
                 {tasks.map(task => {
                   const isUrgent = task.deadline && (new Date(task.deadline) - new Date() < 24 * 60 * 60 * 1000);
                   return (
                     <div
                       key={task.id}
                       draggable
+                      
                       onDragStart={(e) => e.dataTransfer.setData('taskId', task.id)}
                       style={{
-                        border: '1px solid #ccc',
-                        borderRadius: '8px',
-                        padding: '1rem',
-                        width: '200px',
-                        backgroundColor: task.status === 'done' ? '#c8e6c9'
-                          : isUrgent ? '#ffdddd'
-                          : task.assignedTo ? '#555' : '#f9f9f9',
-                        color: task.assignedTo && !isUrgent ? 'white' : 'black'
+                        borderRadius: '12px',
+                        width: "222px",
+                        padding: '1.5rem',
+                        marginBottom: '1rem',
+                        backgroundColor: task.status === 'done' ? "#bdf9bdff" : isUrgent ? '#ffe5e5' : '#f9f9f9',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+                        transition: 'transform 0.2s',
+                        borderLeft: isUrgent ? '5px solid #d33' : '5px solid #1e90ff',
+                        position: 'relative'
                       }}
                     >
                       <h3>{task.title}</h3>
@@ -313,14 +315,15 @@ return (
               </div>
 
              
-              <div style={{ marginTop: '2rem', marginBottom: '1rem' }}>
-  <h2>Employees</h2>
+              <div style={{ marginTop: '2rem', marginBottom: '1rem', textAlign: "center" }}>
+  <h2 className="section-title">Employees</h2>
   <input
     type="text"
     placeholder="Search by name..."
     value={searchTerm}
     onChange={e => setSearchTerm(e.target.value)}
     style={{
+      textAlign: "center",
       padding: '0.5rem',
       width: '250px',
       fontSize: '1rem',
@@ -331,7 +334,7 @@ return (
   />
 </div>
 
-              <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: "center" }}>
                 {workers
                       .filter(worker => worker.role !== 'boss' && worker.username.toLowerCase().startsWith(searchTerm.toLowerCase()))
                       .map(worker => (

@@ -1,36 +1,43 @@
 [
-    {
-        "username": "admin",
-        "password": "admin123",
-        "role": "boss",
-        "image": "anna.avif"
-    },
-    {
-        "username": "Anna",
-        "password": "Annavagyok",
-        "role": "worker",
-        "job": "Frontend-developer",
-        "image": "anna.avif"
-    },
-    {
-        "username": "Bela",
-        "password": "Belavagyok",
-        "role": "worker",
-        "job": "Backend-developer",
-        "image": "bela.avif"
-    },
-    {
-        "username": "Csaba",
-        "password": "Csabavagyok",
-        "role": "worker",
-        "job": "Fullstack-developer",
-        "image": "csaba.jpeg"
-    },
-    {
-        "username": "Dóra",
-        "password": "Doravagyok",
-        "role": "worker",
-        "job": "Recruiter",
-        "image": "dora.png"
-    }
+  {
+    "username": "admin",
+    "password": "AdminPass123",
+    "role": "boss",
+    "image": "bela.avif"
+  },
+  {
+    "username": "Sophie",
+    "password": "SophieDev1",
+    "role": "worker",
+    "job": "Frontend Developer",
+    "image": "anna.avif"
+  },
+  {
+    "username": "Liam",
+    "password": "LiamDev2",
+    "role": "worker",
+    "job": "Backend Developer",
+    "image": "bela.avif"
+  },
+  {
+    "username": "Ethan",
+    "password": "EthanCode3",
+    "role": "worker",
+    "job": "Full-Stack Developer",
+    "image": "csaba.jpeg"
+  },
+  {
+    "username": "Olivia",
+    "password": "OliviaHR4",
+    "role": "worker",
+    "job": "Talent Acquisition Specialist",
+    "image": "dora.png"
+  },
+  {
+    "username": "Chloe",
+    "password": "ChloeHR5",
+    "role": "worker",
+    "job": "HR Coordinator",
+    "image": "dora.png"
+  }
 ]
