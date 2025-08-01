@@ -28,7 +28,7 @@ const Navbar = ({ onLogout, onGoHome, onGoEmployees, onGoProfile, hasUnreadMessa
         zIndex: 1000
       }}
     >
-      <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>DummyCorp.</div>
+      <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>VisionCore.</div>
 
       <div
         style={{ position: 'relative' }}
